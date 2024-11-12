@@ -12,12 +12,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/gim/v1/register", registerRouter);
-app.use("/gim/v1/login", loginRouter);
-app.use("/gim/v1/token", tokenRouter);
-app.use("/gim/v1/logout", logoutRouter);
-app.use("/gim/v1/owners", ownersRouter);
-app.use("/gim/v1/gyms", gymsRouter);
+app.use(registerRouter);
+app.use(loginRouter);
+app.use(tokenRouter);
+app.use(logoutRouter);
+app.use(ownersRouter);
+app.use(gymsRouter);
 
 app.all("*", (req, res) => {
   res.status(404).json({ error: "404 Not Found" });
