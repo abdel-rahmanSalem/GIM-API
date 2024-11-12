@@ -37,5 +37,3 @@ app.all("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`RUNNING ON PORT: ${PORT}`);
 });
-
-export default app;

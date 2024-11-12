@@ -1,7 +1,5 @@
-import { createServer } from "http";
-import app from "../src/index.mjs";
+import app from "./index.mjs";
 
-export default function handler(req, res) {
-  const server = createServer(app);
-  server.emit("request", req, res);
-}
+export default (req, res) => {
+  app(req, res);
+};
