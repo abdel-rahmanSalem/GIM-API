@@ -9,7 +9,6 @@ import gymsRouter from "../routes/gyms.mjs";
 
 const app = express();
 
-// Vercel does not have a local server, so we don't use app.listen()
 app.use(cors());
 app.use(express.json());
 

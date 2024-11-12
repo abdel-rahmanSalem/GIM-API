@@ -2,34 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/**/*.mjs",
+      "src": "api/index.mjs",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/gim/v1/register",
-      "dest": "/api/register.mjs"
-    },
-    {
-      "src": "/gim/v1/login",
-      "dest": "/api/login.mjs"
-    },
-    {
-      "src": "/gim/v1/token",
-      "dest": "/api/token.mjs"
-    },
-    {
-      "src": "/gim/v1/logout",
-      "dest": "/api/logout.mjs"
-    },
-    {
-      "src": "/gim/v1/owners",
-      "dest": "/api/owners.mjs"
-    },
-    {
-      "src": "/gim/v1/gyms",
-      "dest": "/api/gyms.mjs"
+      "src": "/(.*)",
+      "dest": "/api/index.mjs"
     }
   ]
 }
