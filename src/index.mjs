@@ -14,10 +14,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use("/", (req, res) => {
-  res.send("hi");
-});
-
 app.use(registerRouter);
 app.use(loginRouter);
 app.use(tokenRouter);

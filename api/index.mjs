@@ -12,10 +12,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/", (req, res) => {
-  res.send("hi");
-});
-
 app.use("/gim/v1/register", registerRouter);
 app.use("/gim/v1/login", loginRouter);
 app.use("/gim/v1/token", tokenRouter);
