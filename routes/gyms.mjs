@@ -4,7 +4,7 @@ import { getPool } from "../configs/dbConfig.mjs";
 
 const router = Router();
 
-router.get("/sym/v1/gyms", async (req, res) => {
+router.get("/gim/v1/gyms", async (req, res) => {
   const { ownerId } = req.query;
   if (!ownerId || isNaN(ownerId)) {
     return res.status(400).json({
@@ -32,7 +32,7 @@ router.get("/sym/v1/gyms", async (req, res) => {
   }
 });
 
-router.post("/sym/v1/gyms", async (req, res) => {
+router.post("/gim/v1/gyms", async (req, res) => {
   const { ownerId } = req.query;
   const { gymName } = req.body;
   if (!ownerId || isNaN(ownerId)) {
@@ -67,7 +67,7 @@ router.post("/sym/v1/gyms", async (req, res) => {
   }
 });
 
-router.delete("/sym/v1/gyms", async (req, res) => {
+router.delete("/gim/v1/gyms", async (req, res) => {
   const { gymId } = req.query;
   if (!gymId || isNaN(gymId)) {
     return res.status(400).json({

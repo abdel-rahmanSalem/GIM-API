@@ -6,7 +6,9 @@ const handleSignup = async (req, res) => {
   const { name, email, pwd } = req.body;
 
   if ((!name, !email || !pwd))
-    return res.status(400).json({ error: "email, and password are required." });
+    return res
+      .status(400)
+      .json({ error: "name, email, and password are required." });
 
   try {
     const pool = await getPool();
@@ -30,11 +32,8 @@ const handleSignup = async (req, res) => {
         "INSERT INTO Owners (ownerName, email, pwd) OUTPUT Inserted.ownerId VALUES (@name, @email, @hashedPwd)"
       );
 
-    const ownerId = result.recordset[0].ownerId;
-
     res.status(201).json({
       success: "Owner created successfully",
-      ownerId: ownerId,
     });
   } catch (error) {
     console.error("Error creating new owner:", error.message);

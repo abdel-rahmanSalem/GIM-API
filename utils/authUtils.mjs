@@ -1,0 +1,31 @@
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+export function generateAccessToken(user) {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "10m" });
+}
+
+export function generateRefreshToken(user) {
+  return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);
+}
+
+export function verifyRefreshToken(refreshToken) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+      if (err) return reject(err);
+      const accessToken = generateAccessToken(user);
+      resolve(accessToken);
+    });
+  });
+}
+
+export function verifyAccessToken(accessToken) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err) return reject(err);
+      resolve(user);
+    });
+  });
+}
