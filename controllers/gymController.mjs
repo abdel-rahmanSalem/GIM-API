@@ -9,7 +9,7 @@ const getGymsData = async (req, res) => {
     const pool = await getPool();
     const result = await pool
       .request()
-      .input("id", sql.Int, parseInt(ownerId, 10))
+      .input("id", sql.Int, parseInt(id, 10))
       .query("SELECT * FROM Gyms WHERE ownerId = @id");
 
     if (result.recordset.length === 0) {
