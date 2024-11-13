@@ -1,6 +1,5 @@
 import sql from "mssql";
 import { getPool } from "../configs/dbConfig.mjs";
-import bcrypt from "bcryptjs";
 
 const getOwnerData = async (req, res) => {
   const { id, role } = req.user;
