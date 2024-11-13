@@ -16,7 +16,10 @@ const getOwnerData = async (req, res) => {
       return res.status(404).json({ error: "Owner not found" });
     }
 
-    res.status(200).json({ owner: result.recordset[0] });
+    res.status(200).json({
+      name: result.recordset[0].ownerName,
+      email: result.recordset[0].email,
+    });
   } catch (error) {
     console.error("Error fetching owner data:", error);
     res
