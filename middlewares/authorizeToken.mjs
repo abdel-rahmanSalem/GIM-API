@@ -8,13 +8,9 @@ const authorizeUser = async (req, res, next) => {
 
   try {
     const user = await verifyAccessToken(token);
-    console.log(user);
-
     req.user = user;
     next();
   } catch (error) {
-    console.error(error);
-
     res.sendStatus(403);
   }
 };

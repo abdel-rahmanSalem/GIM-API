@@ -8,7 +8,7 @@ const handleSignup = async (req, res) => {
   if ((!name, !email || !pwd))
     return res
       .status(400)
-      .json({ error: "name, email, and password are required." });
+      .json({ error: "name, email, and pwd are required." });
 
   try {
     const pool = await getPool();

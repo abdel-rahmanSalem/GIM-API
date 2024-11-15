@@ -25,6 +25,38 @@ const getGymsData = async (req, res) => {
   }
 };
 
+const getGymData = async (req, res) => {
+  const { id: ownerId, role } = req.user;
+  if (role != "owner") return res.sendStatus(403);
+
+  const { gymId } = req.params;
+  if (!gymId || isNaN(gymId)) {
+    return res.status(400).json({
+      error: "Gym ID query parameter (gymId) is required and must be a number.",
+    });
+  }
+
+  try {
+    const pool = await getPool();
+    const result = await pool
+      .request()
+      .input("gymId", sql.Int, parseInt(gymId, 10))
+      .query("SELECT gymName, ownerId FROM Gyms WHERE gymId = @gymId");
+
+    if (result.rowsAffected[0] === 0)
+      return res.status(404).json({ error: "Gym not found" });
+
+    if (result.recordset[0].ownerId !== ownerId) return res.sendStatus(403);
+
+    res.status(200).json({ gymName: result.recordset[0].gymName });
+  } catch (error) {
+    console.error("Error fetching Gym data:", error);
+    res
+      .status(500)
+      .json({ error: "An error occurred while fetching Gym data" });
+  }
+};
+
 const addGym = async (req, res) => {
   const { id: ownerId, role } = req.user;
   if (role != "owner") return res.sendStatus(403);
@@ -39,7 +71,7 @@ const addGym = async (req, res) => {
       .input("name", sql.VarChar(250), gymName)
       .input("ownerId", sql.Int, parseInt(ownerId, 10))
       .query(
-        "INSERT INTO Gyms (gymName, ownerId) OUTPUT Inserted.ownerId VALUES (@name, @ownerid)"
+        "INSERT INTO Gyms (gymName, ownerId) OUTPUT Inserted.gymId VALUES (@name, @ownerid)"
       );
 
     const gymId = result.recordset[0].gymId;
@@ -57,10 +89,10 @@ const addGym = async (req, res) => {
 };
 
 const deleteGym = async (req, res) => {
-  const { id, role } = req.user;
+  const { role } = req.user;
   if (role != "owner") return res.sendStatus(403);
 
-  const { gymId } = req.query;
+  const { gymId } = req.params;
   if (!gymId || isNaN(gymId)) {
     return res.status(400).json({
       error: "Gym ID query parameter (gymId) is required and must be a number.",
@@ -87,4 +119,4 @@ const deleteGym = async (req, res) => {
   }
 };
 
-export { getGymsData, addGym, deleteGym };
+export { getGymsData, getGymData, addGym, deleteGym };
