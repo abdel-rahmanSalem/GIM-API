@@ -1,17 +1,19 @@
 import sql from "mssql";
-import { getPool } from "../configs/dbConfig.mjs";
+import { getPool } from "../../configs/dbConfig.mjs";
 
 const handleLogout = async (req, res) => {
-  const { token } = req.body;
-  if (!token)
-    return res.status(400).json({ error: "Refresh Token is required." });
+  const { refreshToken } = req.body;
+  if (!refreshToken)
+    return res
+      .status(400)
+      .json({ error: "Refresh Token (refreshToken) is required." });
 
   try {
     const pool = await getPool();
 
     const result = await pool
       .request()
-      .input("token", sql.VarChar(250), token)
+      .input("token", sql.VarChar(250), refreshToken)
       .query("DELETE FROM RefreshTokens WHERE token = @token");
 
     if (result.rowsAffected[0] === 0) {

@@ -1,20 +1,18 @@
 import { Router } from "express";
 import authorizeUser from "../middlewares/authorizeToken.mjs";
-import {
-  getGymsData,
-  deleteGym,
-  addGym,
-  getGymData,
-} from "../controllers/gymController.mjs";
+import getGyms from "../controllers/gym/getGymsController.mjs";
+import getGymById from "../controllers/gym/getGymByIdController.mjs";
+import createGym from "../controllers/gym/createGymController.mjs";
+import deleteGymById from "../controllers/gym/deleteGymByIdController.mjs";
 
 const router = Router();
 
-router.get("/gim/v1/gyms", authorizeUser, getGymsData);
+router.get("/gim/v1/gyms", authorizeUser, getGyms);
 
-router.get("/gim/v1/gyms/:gymId", authorizeUser, getGymData);
+router.get("/gim/v1/gyms/:gymId", authorizeUser, getGymById);
 
-router.post("/gim/v1/gyms", authorizeUser, addGym);
+router.post("/gim/v1/gyms", authorizeUser, createGym);
 
-router.delete("/gim/v1/gyms/:gymId", authorizeUser, deleteGym);
+router.delete("/gim/v1/gyms/:gymId", authorizeUser, deleteGymById);
 
 export default router;
