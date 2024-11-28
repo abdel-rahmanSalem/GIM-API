@@ -1,5 +1,5 @@
 import sql from "mssql";
-import { getPool } from "../configs/dbConfig.mjs";
+import { getPool } from "../../configs/dbConfig.mjs";
 import bcrypt from "bcryptjs";
 
 const handleSignup = async (req, res) => {

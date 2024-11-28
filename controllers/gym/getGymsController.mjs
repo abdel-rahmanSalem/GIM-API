@@ -1,6 +1,5 @@
 import sql from "mssql";
-import { getPool } from "../configs/dbConfig.mjs";
-
+import { getPool } from "../../configs/dbConfig.mjs";
 const getGyms = async (req, res) => {
   const { userId: ownerId, role } = req.user;
   if (role != "owner") return res.sendStatus(403);

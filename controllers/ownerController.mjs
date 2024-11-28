@@ -1,5 +1,5 @@
 import sql from "mssql";
-import { getPool } from "../configs/dbConfig.mjs";
+import { getPool } from "../../configs/dbConfig.mjs";
 
 const getOwnerData = async (req, res) => {
   const { userName: ownerName, userId: ownerId, role } = req.user;

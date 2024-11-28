@@ -1,6 +1,6 @@
 import sql from "mssql";
 import { getPool } from "../configs/dbConfig.mjs";
-import { addOwnership } from "../../utils/gymUtils.mjs";
+import { getPool } from "../../configs/dbConfig.mjs";
 
 const createGym = async (req, res) => {
   const { userId: creatorId, role } = req.user;
