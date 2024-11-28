@@ -1,6 +1,5 @@
 import sql from "mssql";
-import { getPool } from "../configs/dbConfig.mjs";
-
+import { getPool } from "../../configs/dbConfig.mjs";
 const getOwnership = async (req, res) => {
   const { role } = req.user;
   if (role != "owner") return res.sendStatus(403);

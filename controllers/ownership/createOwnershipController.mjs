@@ -1,7 +1,6 @@
 import sql from "mssql";
-import { getPool } from "../configs/dbConfig.mjs";
-import { addOwnership } from "../utils/gymUtils.mjs";
-
+import { getPool } from "../../configs/dbConfig.mjs";
+import { addOwnership } from "../../utils/gymUtils.mjs";
 const createOwnership = async (req, res) => {
   const { userId: creatorId, role } = req.user;
   if (role != "owner") return res.sendStatus(403);

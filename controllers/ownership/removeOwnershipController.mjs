@@ -1,5 +1,5 @@
 import sql from "mssql";
-import { getPool } from "../configs/dbConfig.mjs";
+import { getPool } from "../../configs/dbConfig.mjs";
 
 const removeOwnership = async (req, res) => {
   const { userId: creatorId, role } = req.user;
