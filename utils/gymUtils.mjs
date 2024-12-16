@@ -7,5 +7,7 @@ export async function addOwnership(pool, gymId, ownerId) {
     .input("ownerId", sql.Int, parseInt(ownerId, 10))
     .query("INSERT INTO OwnGym (gymId, ownerId) VALUES (@gymId, @ownerId)");
 
+  console.log("ownnnnnnnn");
+
   return res;
 }

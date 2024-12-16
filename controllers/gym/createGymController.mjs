@@ -22,7 +22,11 @@ const createGym = async (req, res) => {
 
     const gymId = await createGymResult.recordset[0].gymId;
 
+    console.log("before");
+
     const addOwnershipRes = await addOwnership(pool, gymId, creatorId);
+
+    console.log("after");
 
     res.status(201).json({
       message: "Gym created successfully!",
