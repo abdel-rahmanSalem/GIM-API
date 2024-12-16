@@ -6,8 +6,6 @@ import {
   generateRefreshToken,
 } from "../../utils/authUtils.mjs";
 
-//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lZ2F0cm9uIiwidXNlcklkIjozLCJyb2xlIjoib3duZXIiLCJpYXQiOjE3MzI1MzY4NTh9.umpXOyHuMutFjiM1l6NXxmy8lvbjfiA-wDqnmLUmmBA
-
 const handleLogin = async (req, res) => {
   const { identifier, password } = req.body;
 
@@ -37,11 +35,6 @@ const handleLogin = async (req, res) => {
       ownerId,
       empId,
     } = identifierResult.recordset[0];
-
-    // const result = await pool
-    //   .request()
-    //   .input("email", sql.VarChar(50), email)
-    //   .query("SELECT pwd, ownerId FROM Owners WHERE email = @email");
 
     const isPasswordValid = await bcrypt.compare(password, hashedPwd);
     if (!isPasswordValid)

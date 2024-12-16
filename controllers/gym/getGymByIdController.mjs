@@ -14,7 +14,7 @@ const getGymById = async (req, res) => {
     const result = await pool
       .request()
       .input("gymId", sql.Int, parseInt(gymId, 10))
-      .query("SELECT gymName, expenses FROM Gyms WHERE gymId = @gymId");
+      .query("SELECT gymId, gymName, expenses FROM Gyms WHERE gymId = @gymId");
 
     if (result.rowsAffected[0] === 0)
       return res.status(404).json({ error: "Gym not found." });

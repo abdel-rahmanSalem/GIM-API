@@ -1,5 +1,6 @@
 import sql from "mssql";
 import { getPool } from "../../configs/dbConfig.mjs";
+import { addOwnership } from "../../utils/gymUtils.mjs";
 
 const createGym = async (req, res) => {
   const { userId: creatorId, role } = req.user;
@@ -30,7 +31,7 @@ const createGym = async (req, res) => {
     console.error("Error creating new gym:", error);
     res
       .status(500)
-      .json({ error: "An error occurred while creating a new gym" });
+      .json({ error: "An error occurred while creating a new gym." });
   }
 };
 
